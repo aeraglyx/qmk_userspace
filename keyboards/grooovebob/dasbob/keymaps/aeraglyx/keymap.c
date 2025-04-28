@@ -12,6 +12,27 @@ enum layers {
 };
 
 
+#define LT_SYM_REP LT(_SYM, KC_0)
+
+
+bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* remembered_mods) {
+    if (keycode == LT_SYM_REP) { return false; }
+    return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        case LT_SYM_REP:
+            if (record->tap.count) {
+                repeat_key_invoke(&record->event);
+                return false;
+            }
+            break;
+    }
+    return true;
+}
+
+
 uint8_t combo_ref_from_layer(uint8_t layer){
     switch (get_highest_layer(layer_state)){
         case _BAS: return _REF;
@@ -74,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_B,               KC_L,               LT(_FUN, KC_D),     KC_W,               KC_X,               KC_K,               KC_P,               KC_U,               KC_O,               KC_Y,
         LCTL_T(KC_N),       RALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               RCTL_T(KC_H),       RSFT_T(KC_E),       RALT_T(KC_A),       KC_I,
         KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             LSFT(KC_SLSH),
-                                                LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       KC_ESC,             LT(_SYM, QK_REP),   QK_AREP
+                                                LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       KC_ESC,             LT_SYM_REP,         QK_AREP
     ),
 
     [_NAV] = LAYOUT_split_3x5_3(
