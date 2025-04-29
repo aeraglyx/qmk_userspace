@@ -1,7 +1,10 @@
 #include QMK_KEYBOARD_H
 
 #include "keycodes.h"
+#include "keymap_us.h"
 #include "quantum_keycodes.h"
+
+#include "unicode.c"
 
 
 enum layers {
@@ -10,6 +13,7 @@ enum layers {
     _SYM,
     _NUM,
     _FUN,
+    _CZE,
     _REF
 };
 
@@ -21,6 +25,7 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
     if (keycode == LT_SYM_REP) { return false; }
     return true;
 }
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
@@ -95,11 +100,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BAS] = LAYOUT_split_3x5_3(
 
         KC_B,               KC_L,               LT(_FUN, KC_D),     KC_W,               KC_X,               KC_K,               KC_P,               KC_U,               KC_O,               KC_Y,
-        LCTL_T(KC_N),       RALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               RCTL_T(KC_H),       RSFT_T(KC_E),       RALT_T(KC_A),       KC_I,
-        KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             LSFT(KC_SLSH),
-                                                LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       KC_ESC,             LT_SYM_REP,         QK_AREP
         LCTL_T(KC_N),       LALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               LCTL_T(KC_H),       LSFT_T(KC_E),       LALT_T(KC_A),       KC_I,
         KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             KC_QUES,
+                                                LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       LT(_CZE, KC_ESC),   LT_SYM_REP,         QK_AREP
     ),
 
     [_NAV] = LAYOUT_split_3x5_3(
@@ -134,6 +137,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                 KC_MPRV,            KC_MPLY,            KC_MNXT,            KC_MNXT,            KC_MPLY,            KC_MPRV
     ),
 
+    [_CZE] = LAYOUT_split_3x5_3(
+
+        XXXXXXX,            XXXXXXX,            CZ_DCAR,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            CZ_URNG,            CZ_OACU,            CZ_YACU,
+        CZ_NCAR,            CZ_RCAR,            CZ_TCAR,            CZ_SCAR,            XXXXXXX,            XXXXXXX,            CZ_UACU,            CZ_ECAR,            CZ_AACU,            CZ_IACU,
+        XXXXXXX,            XXXXXXX,            XXXXXXX,            CZ_CCAR,            CZ_ZCAR,            XXXXXXX,            XXXXXXX,            CZ_EACU,            XXXXXXX,            XXXXXXX,
+                                                XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX
+    ),
+
     [_REF] = LAYOUT_split_3x5_3(
 
         KC_B,               KC_L,               KC_D,               KC_W,               KC_X,               KC_K,               KC_P,               KC_U,               KC_O,               KC_Y,
@@ -151,4 +162,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ),
 
 };
-

@@ -1,0 +1,84 @@
+#pragma once
+#include QMK_KEYBOARD_H
+
+enum unicode_names {
+    UC_AACU_LOWER,
+    UC_AACU_UPPER,
+    UC_CCAR_LOWER,
+    UC_CCAR_UPPER,
+    UC_DCAR_LOWER,
+    UC_DCAR_UPPER,
+    UC_EACU_LOWER,
+    UC_EACU_UPPER,
+    UC_ECAR_LOWER,
+    UC_ECAR_UPPER,
+    UC_IACU_LOWER,
+    UC_IACU_UPPER,
+    UC_NCAR_LOWER,
+    UC_NCAR_UPPER,
+    UC_OACU_LOWER,
+    UC_OACU_UPPER,
+    UC_RCAR_LOWER,
+    UC_RCAR_UPPER,
+    UC_SCAR_LOWER,
+    UC_SCAR_UPPER,
+    UC_TCAR_LOWER,
+    UC_TCAR_UPPER,
+    UC_UACU_LOWER,
+    UC_UACU_UPPER,
+    UC_URNG_LOWER,
+    UC_URNG_UPPER,
+    UC_YACU_LOWER,
+    UC_YACU_UPPER,
+    UC_ZCAR_LOWER,
+    UC_ZCAR_UPPER,
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+    [UC_AACU_LOWER] = 0x00E1,  // á
+    [UC_AACU_UPPER] = 0x00C1,
+    [UC_CCAR_LOWER] = 0x010D,  // č
+    [UC_CCAR_UPPER] = 0x010C,
+    [UC_DCAR_LOWER] = 0x010F,  // ď
+    [UC_DCAR_UPPER] = 0x010E,
+    [UC_EACU_LOWER] = 0x00E9,  // é
+    [UC_EACU_UPPER] = 0x00C9,
+    [UC_ECAR_LOWER] = 0x011B,  // ě
+    [UC_ECAR_UPPER] = 0x011A,
+    [UC_IACU_LOWER] = 0x00ED,  // í
+    [UC_IACU_UPPER] = 0x00CD,
+    [UC_NCAR_LOWER] = 0x0148,  // ň
+    [UC_NCAR_UPPER] = 0x0147,
+    [UC_OACU_LOWER] = 0x00F3,  // ó
+    [UC_OACU_UPPER] = 0x00D3,
+    [UC_RCAR_LOWER] = 0x0159,  // ř
+    [UC_RCAR_UPPER] = 0x0158,
+    [UC_SCAR_LOWER] = 0x0161,  // š
+    [UC_SCAR_UPPER] = 0x0160,
+    [UC_TCAR_LOWER] = 0x0165,  // ť
+    [UC_TCAR_UPPER] = 0x0164,
+    [UC_UACU_LOWER] = 0x00FA,  // ú
+    [UC_UACU_UPPER] = 0x00FD,
+    [UC_URNG_LOWER] = 0x016F,  // ů
+    [UC_URNG_UPPER] = 0x016E,
+    [UC_YACU_LOWER] = 0x00FD,  // ý
+    [UC_YACU_UPPER] = 0x00DD,
+    [UC_ZCAR_LOWER] = 0x017E,  // ž
+    [UC_ZCAR_UPPER] = 0x017D,
+};
+
+#define CZ_AACU UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // á
+#define CZ_CCAR UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // č
+#define CZ_DCAR UP(UC_DCAR_LOWER, UC_DCAR_UPPER)  // ď
+#define CZ_EACU UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // é
+#define CZ_ECAR UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ě
+#define CZ_IACU UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // í
+#define CZ_NCAR UP(UC_NCAR_LOWER, UC_NCAR_UPPER)  // ň
+#define CZ_OACU UP(UC_OACU_LOWER, UC_OACU_UPPER)  // ó
+#define CZ_RCAR UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ř
+#define CZ_SCAR UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // š
+#define CZ_TCAR UP(UC_TCAR_LOWER, UC_TCAR_UPPER)  // ť
+#define CZ_UACU UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ú
+#define CZ_URNG UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ů
+#define CZ_YACU UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ý
+#define CZ_ZCAR UP(UC_ECAR_LOWER, UC_ECAR_UPPER)  // ž
