@@ -1,6 +1,8 @@
+#include QMK_KEYBOARD_H
+
 #include "keycodes.h"
 #include "quantum_keycodes.h"
-#include QMK_KEYBOARD_H
+
 
 enum layers {
     _BAS,
@@ -96,22 +98,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LCTL_T(KC_N),       RALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               RCTL_T(KC_H),       RSFT_T(KC_E),       RALT_T(KC_A),       KC_I,
         KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             LSFT(KC_SLSH),
                                                 LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       KC_ESC,             LT_SYM_REP,         QK_AREP
+        LCTL_T(KC_N),       LALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               LCTL_T(KC_H),       LSFT_T(KC_E),       LALT_T(KC_A),       KC_I,
+        KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             KC_QUES,
     ),
 
     [_NAV] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            KC_PSCR,            KC_GRAVE,           XXXXXXX,            QK_REBOOT,          QK_BOOT,            KC_HOME,            KC_UP,              KC_END,             XXXXXXX,
-        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LCTL),      OSM(MOD_LSFT),      XXXXXXX,            XXXXXXX,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           XXXXXXX,
+        XXXXXXX,            KC_PSCR,            KC_GRAVE,           XXXXXXX,            QK_BOOT,            QK_BOOT,            KC_HOME,            KC_UP,              KC_END,             XXXXXXX,
+        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LSFT),      OSM(MOD_LCTL),      XXXXXXX,            XXXXXXX,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           XXXXXXX,
         XXXXXXX,            XXXXXXX,            MS_BTN3,            OSM(MOD_MEH),       KC_SLEP,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            KC_ENT,             KC_SPC,             XXXXXXX
     ),
 
     [_SYM] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            KC_LBRC,            KC_RBRC,            LSFT(KC_4),         XXXXXXX,            XXXXXXX,            LSFT(KC_5),         LSFT(KC_BSLS),      LSFT(KC_2),         XXXXXXX,
-        LSFT(KC_1),         LSFT(KC_9),         LSFT(KC_0),         KC_EQL,             KC_SCLN,            LSFT(KC_2),         LSFT_T(KC_EQL),     KC_MINS,            LSFT(KC_SCLN),      KC_BSLS,
-        KC_GRV,             LSFT(KC_LBRC),      LSFT(KC_RBRC),      LSFT(KC_3),         XXXXXXX,            LSFT(KC_6),         LSFT(KC_8),         KC_SLSH,            LSFT(KC_GRV),       XXXXXXX,
-                                                XXXXXXX,            LSFT(KC_MINS),      KC_GRV,             KC_LEFT,            XXXXXXX,            KC_RIGHT
+        XXXXXXX,            KC_LBRC,            KC_RBRC,            KC_DOLLAR,          XXXXXXX,            XXXXXXX,            KC_PERC,            KC_PIPE,            KC_AT,              XXXXXXX,
+        KC_EXLM,            KC_LPRN,            KC_RPRN,            KC_EQL,             KC_SCLN,            KC_AMPR,            KC_PLUS,            KC_MINS,            KC_COLON,           KC_BSLS,
+        KC_GRV,             KC_LCBR,            KC_RCBR,            KC_HASH,            XXXXXXX,            KC_CIRC,            KC_ASTR,            KC_SLSH,            KC_TILDE,           XXXXXXX,
+                                                XXXXXXX,            KC_UNDS,            KC_GRV,             KC_LEFT,            XXXXXXX,            KC_RIGHT
     ),
 
     [_NUM] = LAYOUT_split_3x5_3(
