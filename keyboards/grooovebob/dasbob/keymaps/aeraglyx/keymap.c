@@ -1,8 +1,10 @@
 #include QMK_KEYBOARD_H
+#include <stdint.h>
 
 #include "keycodes.h"
 #include "keymap_us.h"
 #include "quantum_keycodes.h"
+#include "action.h"
 
 #include "unicode.c"
 
@@ -19,47 +21,120 @@ enum layers {
 
 
 #define LT_SYM_REP LT(_SYM, KC_0)
+#define LT_NUM_REP LT(_NUM, KC_0)
+
+// enum custom_keycodes {
+//     // CC_01 = SAFE_RANGE,
+//     // CC_02,
+//     // CC_03,
+//     // CC_04,
+//     // CC_05,
+//     // CC_06,
+//     // CC_07,
+//     // CC_08,
+//     // CC_09,
+//     // CC_10,
+//     CC_10 = SAFE_RANGE,
+//     CC_11,
+//     CC_12
+// };
 
 
 bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* remembered_mods) {
     if (keycode == LT_SYM_REP) { return false; }
+    if (keycode == LT_NUM_REP) { return false; }
     return true;
 }
+
+bool custom_hold(keyrecord_t* record, uint16_t keycode_hold) {
+    if (!record->tap.count && record->event.pressed) {
+        tap_code16(keycode_hold);
+        return false;
+    }
+    return true;
+};
+
+// bool custom_tap_hold(keyrecord_t* record, uint16_t keycode_tap, uint16_t keycode_hold) {
+//     if (record->tap.count && record->event.pressed) {
+//         tap_code(keycode_tap);
+//     } else if (record->event.pressed) {
+//         tap_code(keycode_hold);
+//     }
+//     return false;
+// };
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
+
         case LT_SYM_REP:
+        case LT_NUM_REP:
             if (record->tap.count) {
                 repeat_key_invoke(&record->event);
                 return false;
             }
             break;
+
+        case LT(0, KC_1):
+            return custom_hold(record, KC_F1);
+        case LT(0, KC_2):
+            return custom_hold(record, KC_F2);
+        case LT(0, KC_3):
+            return custom_hold(record, KC_F3);
+        case LT(0, KC_4):
+            return custom_hold(record, KC_F4);
+        case LT(0, KC_5):
+            return custom_hold(record, KC_F5);
+        case LT(0, KC_6):
+            return custom_hold(record, KC_F6);
+        case LT(0, KC_7):
+            return custom_hold(record, KC_F7);
+        case LT(0, KC_8):
+            return custom_hold(record, KC_F8);
+        case LT(0, KC_9):
+            return custom_hold(record, KC_F9);
+
+        case LT(0, KC_TAB):
+            // return custom_tap_hold(record, KC_TAB, KC_F10);
+            return custom_hold(record, KC_F10);
+        case LT(0, KC_DOT):
+            // return custom_tap_hold(record, KC_DOT, KC_F11);
+            return custom_hold(record, KC_F11);
+        case LT(0, KC_0):
+            // return custom_tap_hold(record, KC_0, KC_F12);
+            return custom_hold(record, KC_F12);
     }
     return true;
 }
 
 
-uint8_t combo_ref_from_layer(uint8_t layer){
-    switch (get_highest_layer(layer_state)){
+uint8_t combo_ref_from_layer(uint8_t layer) {
+    switch (get_highest_layer(layer_state)) {
         case _BAS: return _REF;
     }
     return layer;
 }
 
 
-const uint16_t PROGMEM combo_escape[] = {KC_L, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_enter_l[] = {KC_D, KC_W, COMBO_END};
+// left hand
+const uint16_t PROGMEM combo_escape[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_enter_l[] = {KC_M, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_copy[] = {KC_SPC, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_paste[] = {KC_SPC, KC_S, COMBO_END};
-const uint16_t PROGMEM combo_left[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM combo_right[] = {KC_T, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_undo[] = {KC_SPC, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_save[] = {KC_SPC, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_shift_d[] = {KC_D, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_shift_a[] = {KC_D, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_left[] = {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_right[] = {KC_D, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_mouse_middle[] = {KC_M, KC_C, COMBO_END};
 
+// right hand
 const uint16_t PROGMEM combo_backspace[] = {KC_H, KC_E, COMBO_END};
 const uint16_t PROGMEM combo_delete[] = {KC_E, KC_A, COMBO_END};
 const uint16_t PROGMEM combo_enter[] = {KC_V, KC_COMM, COMBO_END};
 
+// both hands
 const uint16_t PROGMEM combo_capslock[] = {KC_T, KC_E, COMBO_END};
 const uint16_t PROGMEM combo_windows[] = {KC_W, KC_P, COMBO_END};
 
@@ -69,6 +144,10 @@ combo_t key_combos[] = {
     COMBO(combo_enter_l, KC_ENT),
     COMBO(combo_copy, LCTL(KC_C)),
     COMBO(combo_paste, LCTL(KC_V)),
+    COMBO(combo_undo, LCTL(KC_Z)),
+    COMBO(combo_save, LCTL(KC_S)),
+    COMBO(combo_shift_d, LSFT(KC_D)),
+    COMBO(combo_shift_a, LSFT(KC_A)),
     COMBO(combo_left, KC_LEFT),
     COMBO(combo_right, KC_RIGHT),
     COMBO(combo_mouse_middle, MS_BTN3),
@@ -101,14 +180,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         KC_B,               KC_L,               LT(_FUN, KC_D),     KC_W,               KC_X,               KC_K,               KC_P,               KC_U,               KC_O,               KC_Y,
         LCTL_T(KC_N),       LALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               LCTL_T(KC_H),       LSFT_T(KC_E),       LALT_T(KC_A),       KC_I,
-        KC_Q,               KC_J,               LT(_FUN, KC_M),     KC_C,               KC_Z,               KC_QUOT,            KC_V,               LT(_FUN, KC_COMM),  KC_DOT,             KC_QUES,
-                                                LT(_NUM, QK_REP),   LT(_NAV, KC_SPC),   SH_T(KC_TAB),       LT(_CZE, KC_ESC),   LT_SYM_REP,         QK_AREP
+        KC_Q,               KC_J,               LT(_FUN, KC_M),     LGUI_T(KC_C),       KC_Z,               KC_QUOT,            LGUI_T(KC_V),       LT(_FUN, KC_COMM),  KC_DOT,             KC_QUES,
+                                                LT_NUM_REP,         LT(_NAV, KC_SPC),   SH_T(KC_TAB),       LT(_CZE, KC_ESC),   LT_SYM_REP,         QK_AREP
     ),
 
     [_NAV] = LAYOUT_split_3x5_3(
 
         XXXXXXX,            KC_PSCR,            KC_GRAVE,           XXXXXXX,            QK_BOOT,            QK_BOOT,            KC_HOME,            KC_UP,              KC_END,             XXXXXXX,
-        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LSFT),      OSM(MOD_LCTL),      XXXXXXX,            XXXXXXX,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           XXXXXXX,
+        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LSFT),      OSM(MOD_LCTL),      QK_MAKE,            QK_MAKE,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           XXXXXXX,
         XXXXXXX,            XXXXXXX,            MS_BTN3,            OSM(MOD_MEH),       KC_SLEP,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            KC_ENT,             KC_SPC,             XXXXXXX
     ),
@@ -123,16 +202,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUM] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            KC_9,               KC_8,               KC_7,               XXXXXXX,            KC_KP_SLASH,        KC_KP_7,            KC_KP_8,            KC_KP_9,            KC_KP_PLUS,
-        KC_0,               KC_6,               KC_5,               KC_4,               XXXXXXX,            KC_KP_ASTERISK,     KC_KP_4,            KC_KP_5,            KC_KP_6,            KC_KP_DOT,
-        XXXXXXX,            KC_3,               KC_2,               KC_1,               XXXXXXX,            XXXXXXX,            KC_KP_1,            KC_KP_2,            KC_KP_3,            KC_KP_MINUS,
+        XXXXXXX,            LT(0, KC_9),        LT(0, KC_8),        LT(0, KC_7),        LT(0, KC_0),        KC_KP_SLASH,        KC_KP_7,            KC_KP_8,            KC_KP_9,            KC_KP_PLUS,
+        KC_0,               LT(0, KC_6),        LT(0, KC_5),        LT(0, KC_4),        LT(0, KC_DOT),      KC_KP_ASTERISK,     KC_KP_4,            KC_KP_5,            KC_KP_6,            KC_KP_DOT,
+        XXXXXXX,            LT(0, KC_3),        LT(0, KC_2),        LT(0, KC_1),        LT(0, KC_TAB),      KC_TAB,             KC_KP_1,            KC_KP_2,            KC_KP_3,            KC_KP_MINUS,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            KC_DOWN,            KC_KP_0,            KC_UP
     ),
 
     [_FUN] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            KC_F1,              XXXXXXX,            KC_F3,              XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
-        XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            KC_F1,              XXXXXXX,            KC_F3,              XXXXXXX,            XXXXXXX,            MS_BTN1,            MS_UP,              MS_BTN2,            XXXXXXX,
+        XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            MS_LEFT,            MS_DOWN,            MS_RGHT,            MS_BTN3,
         XXXXXXX,            KC_VOLD,            XXXXXXX,            KC_VOLU,            XXXXXXX,            XXXXXXX,            KC_VOLU,            XXXXXXX,            KC_VOLD,            XXXXXXX,
                                                 KC_MPRV,            KC_MPLY,            KC_MNXT,            KC_MNXT,            KC_MPLY,            KC_MPRV
     ),
