@@ -15,6 +15,7 @@ enum layers {
     _SYM,
     _NUM,
     _FUN,
+    _MIR,
     _CZE,
     _REF
 };
@@ -93,15 +94,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             return custom_hold(record, KC_F8);
         case LT(0, KC_9):
             return custom_hold(record, KC_F9);
-
         case LT(0, KC_TAB):
-            // return custom_tap_hold(record, KC_TAB, KC_F10);
             return custom_hold(record, KC_F10);
         case LT(0, KC_DOT):
-            // return custom_tap_hold(record, KC_DOT, KC_F11);
             return custom_hold(record, KC_F11);
         case LT(0, KC_0):
-            // return custom_tap_hold(record, KC_0, KC_F12);
             return custom_hold(record, KC_F12);
     }
     return true;
@@ -122,21 +119,23 @@ const uint16_t PROGMEM combo_enter_l[] = {KC_M, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_copy[] = {KC_SPC, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_paste[] = {KC_SPC, KC_S, COMBO_END};
 const uint16_t PROGMEM combo_undo[] = {KC_SPC, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_save[] = {KC_SPC, KC_R, COMBO_END};
+// const uint16_t PROGMEM combo_save[] = {KC_SPC, KC_R, COMBO_END};
 const uint16_t PROGMEM combo_shift_d[] = {KC_D, KC_S, COMBO_END};
 const uint16_t PROGMEM combo_shift_a[] = {KC_D, KC_R, COMBO_END};
-const uint16_t PROGMEM combo_left[] = {KC_L, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_right[] = {KC_D, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_mouse_middle[] = {KC_M, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_left_l[] = {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_right_l[] = {KC_D, KC_W, COMBO_END};
+// const uint16_t PROGMEM combo_mouse_middle[] = {KC_J, KC_M, COMBO_END};
+const uint16_t PROGMEM combo_lgui[] = {KC_W, KC_G, COMBO_END};
 
 // right hand
 const uint16_t PROGMEM combo_backspace[] = {KC_H, KC_E, COMBO_END};
 const uint16_t PROGMEM combo_delete[] = {KC_E, KC_A, COMBO_END};
-const uint16_t PROGMEM combo_enter[] = {KC_V, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_enter_r[] = {KC_V, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_left_r[] = {KC_U, KC_P, COMBO_END};
+const uint16_t PROGMEM combo_right_r[] = {KC_O, KC_U, COMBO_END};
 
 // both hands
 const uint16_t PROGMEM combo_capslock[] = {KC_T, KC_E, COMBO_END};
-const uint16_t PROGMEM combo_windows[] = {KC_W, KC_P, COMBO_END};
 
 
 combo_t key_combos[] = {
@@ -145,19 +144,21 @@ combo_t key_combos[] = {
     COMBO(combo_copy, LCTL(KC_C)),
     COMBO(combo_paste, LCTL(KC_V)),
     COMBO(combo_undo, LCTL(KC_Z)),
-    COMBO(combo_save, LCTL(KC_S)),
+    // COMBO(combo_save, LCTL(KC_S)),
     COMBO(combo_shift_d, LSFT(KC_D)),
     COMBO(combo_shift_a, LSFT(KC_A)),
-    COMBO(combo_left, KC_LEFT),
-    COMBO(combo_right, KC_RIGHT),
-    COMBO(combo_mouse_middle, MS_BTN3),
+    COMBO(combo_left_l, KC_LEFT),
+    COMBO(combo_right_l, KC_RIGHT),
+    // COMBO(combo_mouse_middle, MS_BTN3),
 
     COMBO(combo_backspace, KC_BSPC),
     COMBO(combo_delete, KC_DEL),
-    COMBO(combo_enter, KC_ENT),
+    COMBO(combo_enter_r, KC_ENT),
+    COMBO(combo_left_r, KC_LEFT),
+    COMBO(combo_right_r, KC_RIGHT),
 
     COMBO(combo_capslock, CW_TOGG),
-    COMBO(combo_windows, KC_LGUI),
+    COMBO(combo_lgui, KC_LGUI),
 };
 
 
@@ -181,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_B,               KC_L,               LT(_FUN, KC_D),     KC_W,               KC_X,               KC_K,               KC_P,               KC_U,               KC_O,               KC_Y,
         LCTL_T(KC_N),       LALT_T(KC_R),       LSFT_T(KC_T),       LCTL_T(KC_S),       KC_G,               KC_F,               LCTL_T(KC_H),       LSFT_T(KC_E),       LALT_T(KC_A),       KC_I,
         KC_Q,               KC_J,               LT(_FUN, KC_M),     LGUI_T(KC_C),       KC_Z,               KC_QUOT,            LGUI_T(KC_V),       LT(_FUN, KC_COMM),  KC_DOT,             KC_QUES,
-                                                LT_NUM_REP,         LT(_NAV, KC_SPC),   SH_T(KC_TAB),       LT(_CZE, KC_ESC),   LT_SYM_REP,         QK_AREP
+                                                LT_NUM_REP,         LT(_NAV, KC_SPC),   LT(_MIR, KC_TAB),   LT(_CZE, KC_ESC),   LT_SYM_REP,         QK_AREP
     ),
 
     [_NAV] = LAYOUT_split_3x5_3(
@@ -214,6 +215,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            MS_LEFT,            MS_DOWN,            MS_RGHT,            MS_BTN3,
         XXXXXXX,            KC_VOLD,            XXXXXXX,            KC_VOLU,            XXXXXXX,            XXXXXXX,            KC_VOLU,            XXXXXXX,            KC_VOLD,            XXXXXXX,
                                                 KC_MPRV,            KC_MPLY,            KC_MNXT,            KC_MNXT,            KC_MPLY,            KC_MPRV
+    ),
+
+    [_MIR] = LAYOUT_split_3x5_3(
+
+        KC_Y,               KC_O,               KC_U,               KC_P,               KC_K,               XXXXXXX,            MS_WHLU,            MS_UP,              MS_WHLD,            XXXXXXX,
+        KC_I,               KC_A,               KC_E,               KC_H,               KC_F,               XXXXXXX,            MS_LEFT,            MS_DOWN,            MS_RGHT,            MS_BTN2,
+        KC_QUES,            KC_DOT,             KC_COMM,            KC_V,               MS_ACL0,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
+                                                XXXXXXX,            XXXXXXX,            XXXXXXX,            MS_BTN3,            MS_BTN1,            MS_BTN2
     ),
 
     [_CZE] = LAYOUT_split_3x5_3(
