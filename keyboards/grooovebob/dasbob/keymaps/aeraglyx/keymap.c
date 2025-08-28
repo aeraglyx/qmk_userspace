@@ -227,7 +227,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_CZE] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            XXXXXXX,            CZ_DCAR,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            CZ_URNG,            CZ_OACU,            CZ_YACU,
+        XXXXXXX,            UC_LINX,            CZ_DCAR,            UC_WINC,            XXXXXXX,            XXXXXXX,            XXXXXXX,            CZ_URNG,            CZ_OACU,            CZ_YACU,
         CZ_NCAR,            CZ_RCAR,            CZ_TCAR,            CZ_SCAR,            XXXXXXX,            XXXXXXX,            CZ_UACU,            CZ_ECAR,            CZ_AACU,            CZ_IACU,
         XXXXXXX,            XXXXXXX,            XXXXXXX,            CZ_CCAR,            CZ_ZCAR,            XXXXXXX,            XXXXXXX,            CZ_EACU,            XXXXXXX,            XXXXXXX,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX
