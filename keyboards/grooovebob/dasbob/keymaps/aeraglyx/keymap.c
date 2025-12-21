@@ -26,22 +26,6 @@ enum layers {
 #define LT_NUM_REP LT(_NUM, KC_0)
 #define LT_NUM_ALT LT(_FUN, KC_1)
 
-// enum custom_keycodes {
-//     // CC_01 = SAFE_RANGE,
-//     // CC_02,
-//     // CC_03,
-//     // CC_04,
-//     // CC_05,
-//     // CC_06,
-//     // CC_07,
-//     // CC_08,
-//     // CC_09,
-//     // CC_10,
-//     CC_10 = SAFE_RANGE,
-//     CC_11,
-//     CC_12
-// };
-
 
 bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* remembered_mods) {
     if (keycode == LT_SYM_REP) { return false; }
@@ -50,6 +34,7 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record, uint8_t* reme
     return true;
 }
 
+
 bool custom_hold(keyrecord_t* record, uint16_t keycode_hold) {
     if (!record->tap.count && record->event.pressed) {
         tap_code16(keycode_hold);
@@ -57,15 +42,6 @@ bool custom_hold(keyrecord_t* record, uint16_t keycode_hold) {
     }
     return true;
 };
-
-// bool custom_tap_hold(keyrecord_t* record, uint16_t keycode_tap, uint16_t keycode_hold) {
-//     if (record->tap.count && record->event.pressed) {
-//         tap_code(keycode_tap);
-//     } else if (record->event.pressed) {
-//         tap_code(keycode_hold);
-//     }
-//     return false;
-// };
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -129,12 +105,10 @@ const uint16_t PROGMEM combo_enter_l[] = {KC_M, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_copy[] = {KC_SPC, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_paste[] = {KC_SPC, KC_S, COMBO_END};
 const uint16_t PROGMEM combo_undo[] = {KC_SPC, KC_D, COMBO_END};
-// const uint16_t PROGMEM combo_save[] = {KC_SPC, KC_R, COMBO_END};
 const uint16_t PROGMEM combo_shift_d[] = {KC_D, KC_S, COMBO_END};
 const uint16_t PROGMEM combo_shift_a[] = {KC_D, KC_R, COMBO_END};
 const uint16_t PROGMEM combo_left_l[] = {KC_L, KC_D, COMBO_END};
 const uint16_t PROGMEM combo_right_l[] = {KC_D, KC_W, COMBO_END};
-// const uint16_t PROGMEM combo_mouse_middle[] = {KC_J, KC_M, COMBO_END};
 const uint16_t PROGMEM combo_lgui[] = {KC_W, KC_G, COMBO_END};
 
 // right hand
@@ -154,12 +128,11 @@ combo_t key_combos[] = {
     COMBO(combo_copy, LCTL(KC_C)),
     COMBO(combo_paste, LCTL(KC_V)),
     COMBO(combo_undo, LCTL(KC_Z)),
-    // COMBO(combo_save, LCTL(KC_S)),
     COMBO(combo_shift_d, LSFT(KC_D)),
     COMBO(combo_shift_a, LSFT(KC_A)),
     COMBO(combo_left_l, KC_LEFT),
     COMBO(combo_right_l, KC_RIGHT),
-    // COMBO(combo_mouse_middle, MS_BTN3),
+    COMBO(combo_lgui, KC_LGUI),
 
     COMBO(combo_backspace, KC_BSPC),
     COMBO(combo_delete, KC_DEL),
@@ -168,20 +141,6 @@ combo_t key_combos[] = {
     COMBO(combo_right_r, KC_RIGHT),
 
     COMBO(combo_capslock, CW_TOGG),
-    COMBO(combo_lgui, KC_LGUI),
-};
-
-
-const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
-    {{4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
-    {{4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
-    {{4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
-    {{2, 7}, {1, 7}, {0, 7}, {0, 0}, {0, 0}},
-
-    {{4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
-    {{4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
-    {{4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
-    {{2, 3}, {1, 3}, {0, 3}, {0, 0}, {0, 0}},
 };
 
 
