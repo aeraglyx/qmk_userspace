@@ -156,9 +156,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT_split_3x5_3(
 
-        XXXXXXX,            KC_PSCR,            KC_GRAVE,           XXXXXXX,            QK_BOOT,            QK_BOOT,            KC_HOME,            KC_UP,              KC_END,             XXXXXXX,
-        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LSFT),      OSM(MOD_LCTL),      QK_MAKE,            QK_MAKE,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           XXXXXXX,
-        XXXXXXX,            XXXXXXX,            MS_BTN3,            OSM(MOD_MEH),       KC_SLEP,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            KC_PSCR,            KC_GRAVE,           XXXXXXX,            QK_BOOT,            XXXXXXX,            KC_HOME,            KC_UP,              KC_END,             XXXXXXX,
+        OSM(MOD_LGUI),      OSM(MOD_RALT),      OSM(MOD_LSFT),      OSM(MOD_LCTL),      QK_MAKE,            KC_PGUP,            KC_LEFT,            KC_DOWN,            KC_RIGHT,           KC_PGDN,
+        XXXXXXX,            XXXXXXX,            MS_BTN3,            OSM(MOD_MEH),       KC_SLEP,            XXXXXXX,            KC_PGUP,            KC_PGDN,            KC_PGDN,            XXXXXXX,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            KC_ENT,             KC_SPC,             XXXXXXX
     ),
 
@@ -189,8 +189,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MIR] = LAYOUT_split_3x5_3(
 
         KC_Y,               KC_O,               KC_U,               KC_P,               KC_K,               XXXXXXX,            MS_WHLU,            MS_UP,              MS_WHLD,            XXXXXXX,
-        KC_I,               KC_A,               KC_E,               KC_H,               KC_F,               XXXXXXX,            MS_LEFT,            MS_DOWN,            MS_RGHT,            MS_BTN2,
-        KC_QUES,            KC_DOT,             KC_COMM,            KC_V,               KC_QUOT,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
+        LCTL_T(KC_I),       LALT_T(KC_A),       LSFT_T(KC_E),       LCTL_T(KC_H),       KC_F,               XXXXXXX,            MS_LEFT,            MS_DOWN,            MS_RGHT,            MS_BTN2,
+        KC_QUES,            KC_DOT,             KC_COMM,            LGUI_T(KC_V),       KC_QUOT,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,            XXXXXXX,
                                                 XXXXXXX,            XXXXXXX,            XXXXXXX,            MS_BTN3,            MS_BTN1,            MS_BTN2
     ),
 
