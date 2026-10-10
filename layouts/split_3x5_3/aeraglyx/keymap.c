@@ -1,10 +1,4 @@
 #include QMK_KEYBOARD_H
-#include <stdint.h>
-
-#include "keycodes.h"
-#include "keymap_us.h"
-#include "quantum_keycodes.h"
-#include "action.h"
 
 #include "unicode.c"
 
